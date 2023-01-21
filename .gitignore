@@ -1,0 +1,5 @@
+capstone/.env
+*.sqlite3
+*.pyc
+/venv
+requirements.txt
