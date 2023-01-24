@@ -6,6 +6,10 @@
 {% endblock %}
 {% block body %}
 
-    
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}</p>
+    {% else %}
+        <p>login to view your profile</p>
+    {% endif %}
 
 {% endblock %}
