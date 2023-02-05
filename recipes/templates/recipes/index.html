@@ -5,11 +5,346 @@
 
 {% endblock %}
 {% block body %}
-
-    {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}</p>
-    {% else %}
-        <p>login to view your profile</p>
-    {% endif %}
-
+<div id="search">
+    <div class="row">
+        <div class="col-10 offset-1 col-md-8 offset-md-2">
+            <div class="card my-5">
+                <form id="search-form" class="mt-3 text-center" role="search">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <h4>What would you like to eat today{% if request.user.is_authenticated %}, {{ user.username }}{% endif %}?</h4>
+                        <input id="recipe" name="recipe" class="form-control" type="search" placeholder="Search for a recipe" aria-label="Search">
+                    </div>
+                    <div class="advanced-search-options">
+                        <h4 class="mt-5 card-header">Cuisines</h4>
+                        <div class="card-body" id="cuisine">
+                            <div class="form-check">
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="african" id="african" value="african">
+                                        <label class="form-check-label" for="african">
+                                            African
+                                        </label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="american" id="american" value="american">
+                                        <label class="form-check-label" for="american">
+                                            American
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="british" id="british" value="british">
+                                        <label class="form-check-label" for="british">
+                                            British
+                                        </label> 
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="cajun" id="cajun" value="cajun">
+                                        <label class="form-check-label" for="cajun">
+                                            Cajun
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="caribbean" id="caribbean" value="caribbean">
+                                        <label class="form-check-label" for="caribbean">
+                                            Caribbean
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="chinese" id="chinese" value="chinese">
+                                        <label class="form-check-label" for="chinese">
+                                            Chinese
+                                        </label> 
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="eastern-european" id="eastern-european" value="eastern-european">
+                                        <label class="form-check-label" for="eastern-european">
+                                            Eastern European
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="french" id="french" value="french">
+                                        <label class="form-check-label" for="french">
+                                            French
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="german" id="german" value="german">
+                                        <label class="form-check-label" for="german">
+                                            German
+                                        </label> 
+                                    </div>                 
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="greek" id="greek" value="greek">
+                                        <label class="form-check-label" for="greek">
+                                            Greek
+                                        </label> 
+                                    </div>  
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="irish" id="irish" value="irish">
+                                        <label class="form-check-label" for="irish">
+                                            Irish
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="indian" id="indian" value="indian">
+                                        <label class="form-check-label" for="indian">
+                                            Indian
+                                        </label> 
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="italian" id="italian" value="italian">
+                                        <label class="form-check-label" for="italian">
+                                            Italian
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="japanese" id="japanese" value="japanese">
+                                        <label class="form-check-label" for="japanese">
+                                            Japanese
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="jewish" id="jewish" value="jewish">
+                                        <label class="form-check-label" for="jewish">
+                                            Jewish
+                                        </label> 
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="korean" id="korean" value="korean">
+                                        <label class="form-check-label" for="korean">
+                                            Korean
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="latin-america" id="latin-america" value="latin-america">
+                                        <label class="form-check-label" for="latin-america">
+                                            Latin America
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="mexican" id="mexican" value="mexican">
+                                        <label class="form-check-label" for="mexican">
+                                            Mexican
+                                        </label> 
+                                    </div>                        
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="middle-eastern" id="middle-eastern" value="middle-eastern">
+                                        <label class="form-check-label" for="middle-eastern">
+                                            Middle Eastern
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="nordic" id="nordic" value="nordic">
+                                        <label class="form-check-label" for="nordic">
+                                            Nordic
+                                        </label> 
+                                    </div>                        
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="southern" id="southern" value="southern">
+                                        <label class="form-check-label" for="southern">
+                                            Southern
+                                        </label> 
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="spanish" id="spanish" value="spanish">
+                                        <label class="form-check-label" for="spanish">
+                                            Spanish
+                                        </label> 
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="thai" id="thai" value="thai">
+                                        <label class="form-check-label" for="thai">
+                                            Thai
+                                        </label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" name="vietnamese" id="vietnamese" value="vietnamese">
+                                        <label class="form-check-label" for="vietnamese">
+                                            Vietnamese
+                                        </label> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="mt-5 card-header">Dietary Requirements</h4>
+                        <div class="card-body" id="dietary">
+                            <div class="form-check form-switch">
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="pescetarian">
+                                        <label class="form-check-label" for="pescetarian">Pescetarian</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="vegan">
+                                        <label class="form-check-label" for="vegan">Vegan</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="vegetarian">
+                                        <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="paleo">
+                                        <label class="form-check-label" for="paleo">Paleo</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="primal">
+                                        <label class="form-check-label" for="primal">Primal</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="ketogenic">
+                                        <label class="form-check-label" for="ketogenic">Ketogenic</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="mt-5 card-header">Intolerances (Recipies must not contain...)</h4>
+                        <div class="card-body" id="intolerances">
+                            <div class="form-check form-switch">
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="dairy">
+                                        <label class="form-check-label" for="dairy">Dairy</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="egg">
+                                        <label class="form-check-label" for="egg">Egg</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="gluten">
+                                        <label class="form-check-label" for="gluten">Gluten</label>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="peanut">
+                                        <label class="form-check-label" for="peanut">Peanut</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="sesame">
+                                        <label class="form-check-label" for="sesame">Sesame</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="seafood">
+                                        <label class="form-check-label" for="seafood">Seafood</label>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="shellfish">
+                                        <label class="form-check-label" for="shellfish">Shellfish</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="soy">
+                                        <label class="form-check-label" for="soy">Soy</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="sulfite">
+                                        <label class="form-check-label" for="sulfite">Sulfite</label>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="tree-nut">
+                                        <label class="form-check-label" for="tree-nut">Tree Nut</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="wheat">
+                                        <label class="form-check-label" for="wheat">Wheat</label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="mt-5 card-header text-center">Nutritional Preferences</h4>
+                        <div class="card-body">
+                            <!-- Carbs -->
+                            <div class="row mt-3">
+                                <div class="col-12 col-md-6">
+                                    <input type="text" class="form-control" placeholder="Minimum Carbs" name="minCarbs" aria-label="Minimum Carbs">
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <input type="text" class="form-control" placeholder="Maximum Carbs" name="maxCarbs" aria-label="Maximum Carbs">
+                                </div>
+                            </div>
+                            <!-- Protein -->
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Minimum Protein" name="minProtein" aria-label="Minimum Protein">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Maximum Protein" name="maxProtein" aria-label="Maximum Protein">
+                                </div>
+                            </div>
+                            <!-- Calories -->
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Minimum Calories" name="minCalories" aria-label="Minimum Calories">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Maximum Calories" name="maxCalories" aria-label="Maximum Calories">
+                                </div>
+                            </div>
+                            <!-- Fat -->
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Minimum Fat" name="minFat" aria-label="Minimum Fat">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Maximum Fat" name="maxFat" aria-label="Maximum Fat">
+                                </div>
+                            </div>
+                            <!-- Saturted Fat -->
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Minimum Saturated Fat" name="minSaturatedFat" aria-label="Minimum Saturated Fat">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Maximum Saturated Fat" name="maxSaturatedFat" aria-label="Maximum Saturated Fat">
+                                </div>
+                            </div>
+                            <!-- Fiber -->
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Minimum Fiber" name="minFiber" aria-label="Minimum Fiber">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Maximum Fiber" name="maxFiber" aria-label="Maximum Fiber">
+                                </div>
+                            </div>
+                            <!-- Sugar -->
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Minimum Sugar" name="minSugar" aria-label="Minimum Sugar">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Maximum Sugar" name="maxSugar" aria-label="Maximum Sugar">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-success my-3" type="submit">Search</button>
+                    <button id="advanced-search" class="btn btn-outline-primary my-3" type="button">Advanced Search</button>
+                    <button id="hide-advanced-search" class="btn btn-outline-primary my-3" type="button">Hide Advanced Search</button>
+                </form>
+            </div>
+        </div>
+    </div>  
+</div>
 {% endblock %}

@@ -3,3 +3,4 @@ capstone/.env
 *.pyc
 /venv
 requirements.txt
+secrets.js
