@@ -5,3 +5,7 @@
 #hide-advanced-search {
     display: none;
 }
+
+#search-error {
+    display: none;
+}
